@@ -35,18 +35,34 @@ npx expo install --fix          # Automatically update any invalid package versi
 ### Building & Testing
 
 ```bash
-npx expo doctor      # Check project health and dependencies
-npx expo lint        # Run ESLint
+npx expo prebuild               # Generate native projects
+npx expo run:ios                # Build and run on iOS device
+npx expo run:android            # Build and run on Android device
+npx expo doctor                 # Check project health and dependencies
+npm expo lint                   # Run ESLint
 ```
 
 ### Production
 
 ```bash
-npx eas-cli@latest build --platform ios -s          # Use EAS to build for iOS platform and submit to App Store
-npx eas-cli@latest build --platform android -s      # Use EAS to build for Android platform and submit to Google Play Store
+npx eas-cli@latest build --platform ios -s            # Use EAS to build for iOS platform and submit to App Store
+npx eas-cli@latest build --platform android -s        # Use EAS to build for Android platform and submit to Google Play Store
+npx expo export -p web && npx eas-cli@latest deploy   # Deploy web to EAS Hosting
 ```
 
 ## Development Guidelines
+
+### Code Style & Standards
+
+- **TypeScript First**: Use TypeScript for all new code with strict type checking
+- **Naming Conventions**: Use meaningful, descriptive names for variables, functions, and components
+- **Self-Documenting Code**: Write clear, readable code that explains itself; only add comments for complex business logic or design decisions
+- **React 19 Patterns**: Follow modern React patterns including:
+  - Function components with hooks
+  - Enable React Compiler
+  - Proper dependency arrays in useEffect
+  - Memoization when appropriate (useMemo, useCallback)
+  - Error boundaries for better error handling
 
 ### Recommended Libraries
 
