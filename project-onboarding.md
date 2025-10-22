@@ -50,7 +50,7 @@ npx eas-cli@latest build --platform android -s        # Use EAS to build for And
 npx expo export -p web && npx eas-cli@latest deploy   # Deploy web to EAS Hosting
 ```
 
-## Development Guidelines
+## Development Principles
 
 ### Code Style & Standards
 
