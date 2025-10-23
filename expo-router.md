@@ -7,7 +7,6 @@ File-based router for React Native and web applications built on React Navigatio
 ## Core Concepts
 
 ### File Structure Rules
-
 - All routes live in `app/` directory
 - Each file = a screen/page with automatic URL
 - `app/index.tsx` = initial route (`/`)
@@ -15,7 +14,6 @@ File-based router for React Native and web applications built on React Navigatio
 - Non-navigation code goes outside `app/`
 
 ### File Naming Convention
-
 - `home.tsx` → `/home` (static route)
 - `[id].tsx` → `/123` (dynamic route)
 - `(tabs)/` → route group (doesn't affect URL)
@@ -26,19 +24,17 @@ File-based router for React Native and web applications built on React Navigatio
 ## Navigation
 
 ### Imperative Navigation
-
 ```tsx
-import { useRouter } from "expo-router";
+import { useRouter } from 'expo-router';
 
 const router = useRouter();
-router.navigate("/about"); // Navigate to route
-router.push("/about"); // Push onto stack
-router.back(); // Go back
-router.replace("/about"); // Replace current
+router.navigate('/about');      // Navigate to route
+router.push('/about');          // Push onto stack
+router.back();                  // Go back
+router.replace('/about');       // Replace current
 ```
 
 ### Declarative Navigation
-
 ```tsx
 import { Link } from 'expo-router';
 
@@ -58,10 +54,9 @@ import { Link } from 'expo-router';
 ```
 
 ### Dynamic Routes & Params
-
 ```tsx
 // File: app/user/[id].tsx
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams } from 'expo-router';
 
 export default function User() {
   const { id } = useLocalSearchParams();
@@ -72,15 +67,12 @@ export default function User() {
 ## Layouts
 
 ### Root Layout (`app/_layout.tsx`)
-
 ```tsx
-import { Stack } from "expo-router";
-import { useFonts } from "expo-font";
+import { Stack } from 'expo-router';
+import { useFonts } from 'expo-font';
 
 export default function RootLayout() {
-  const [loaded] = useFonts({
-    /* fonts */
-  });
+  const [loaded] = useFonts({ /* fonts */ });
 
   if (!loaded) return null;
 
@@ -89,14 +81,13 @@ export default function RootLayout() {
 ```
 
 ### Stack Layout
-
 ```tsx
-import { Stack } from "expo-router";
+import { Stack } from 'expo-router';
 
 export default function Layout() {
   return (
     <Stack>
-      <Stack.Screen name="index" options={{ title: "Home" }} />
+      <Stack.Screen name="index" options={{ title: 'Home' }} />
       <Stack.Screen name="about" options={{ headerShown: false }} />
     </Stack>
   );
@@ -104,33 +95,30 @@ export default function Layout() {
 ```
 
 ### Tab Layout
-
 ```tsx
-import { Tabs } from "expo-router";
-import { FontAwesome } from "@expo/vector-icons";
+import { Tabs } from 'expo-router';
+import { FontAwesome } from '@expo/vector-icons';
 
 export default function TabLayout() {
   return (
-    <Tabs screenOptions={{ tabBarActiveTintColor: "blue" }}>
+    <Tabs screenOptions={{ tabBarActiveTintColor: 'blue' }}>
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
-          tabBarIcon: ({ color }) => (
+          title: 'Home',
+          tabBarIcon: ({ color }) =>
             <FontAwesome size={28} name="home" color={color} />
-          ),
         }}
       />
-      <Tabs.Screen name="settings" options={{ title: "Settings" }} />
+      <Tabs.Screen name="settings" options={{ title: 'Settings' }} />
     </Tabs>
   );
 }
 ```
 
 ### Slot Layout (No Navigator)
-
 ```tsx
-import { Slot } from "expo-router";
+import { Slot } from 'expo-router';
 
 export default function Layout() {
   return (
@@ -146,7 +134,6 @@ export default function Layout() {
 ## Common Patterns
 
 ### Tabs with Stack
-
 ```
 app/
   _layout.tsx           # Root stack
@@ -158,14 +145,13 @@ app/
 ```
 
 ### Authentication Flow
-
 ```tsx
 // app/_layout.tsx
 export default function RootLayout() {
   return (
     <Stack>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="login" options={{ presentation: "modal" }} />
+      <Stack.Screen name="login" options={{ presentation: 'modal' }} />
     </Stack>
   );
 }
@@ -174,7 +160,7 @@ export default function RootLayout() {
 ### Protected Routes
 
 ```tsx app/_layout.tsx
-import { Stack } from "expo-router";
+import { Stack } from 'expo-router';
 
 const isLoggedIn = false;
 
@@ -196,24 +182,24 @@ export function AppLayout() {
 
 ## Tabs and Drawer
 
-Protected routes are also available for Tabs.
+Protected routes are also available for [Tabs](/router/advanced/tabs/) navigators.
 
 ```tsx app/_layout.tsx
-import { Tabs } from "expo-router";
+import { Tabs } from 'expo-router';
 
 const isLoggedIn = false;
 
 export default function TabLayout() {
   return (
     <Tabs>
-      <Tabs.Screen name="index" options={{ tabBarLabel: "Home" }} />
+      <Tabs.Screen name="index" options={{ tabBarLabel: 'Home' }} />
       <Tabs.Protected guard={isLoggedIn}>
-        <Tabs.Screen name="private" options={{ tabBarLabel: "Private" }} />
-        <Tabs.Screen name="profile" options={{ tabBarLabel: "Profile" }} />
+        <Tabs.Screen name="private" options={{ tabBarLabel: 'Private' }} />
+        <Tabs.Screen name="profile" options={{ tabBarLabel: 'Profile' }} />
       </Tabs.Protected>
 
       <Tabs.Protected guard={!isLoggedIn}>
-        <Tabs.Screen name="login" options={{ tabBarLabel: "Login" }} />
+        <Tabs.Screen name="login" options={{ tabBarLabel: 'Login' }} />
       </Tabs.Protected>
     </Tabs>
   );
@@ -231,7 +217,6 @@ export default function TabLayout() {
 - Hide tabs: `<Tabs.Screen options={{ href: null }} />`
 
 ## Example App Structure
-
 ```
 app/
   _layout.tsx           # Root layout
