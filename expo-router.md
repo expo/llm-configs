@@ -158,17 +158,51 @@ export default function RootLayout() {
 ```
 
 ### Protected Routes
-```tsx
-import { Redirect } from 'expo-router';
 
-export default function ProtectedPage() {
-  const { user } = useAuth();
+```tsx app/_layout.tsx
+import { Stack } from 'expo-router';
 
-  if (!user) {
-    return <Redirect href="/login" />;
-  }
+const isLoggedIn = false;
 
-  return <Text>Protected Content</Text>;
+export function AppLayout() {
+  return (
+    <Stack>
+      <Stack.Protected guard={!isLoggedIn}>
+        <Stack.Screen name="login" />
+      </Stack.Protected>
+
+      <Stack.Protected guard={isLoggedIn}>
+        <Stack.Screen name="private" />
+      </Stack.Protected>
+      {/* Expo Router includes all routes by default. Adding Stack.Protected creates exceptions for these screens. */}
+    </Stack>
+  );
+}
+```
+
+## Tabs and Drawer
+
+Protected routes are also available for [Tabs](/router/advanced/tabs/) navigators.
+
+```tsx app/_layout.tsx
+import { Tabs } from 'expo-router';
+
+const isLoggedIn = false;
+
+export default function TabLayout() {
+  return (
+    <Tabs>
+      <Tabs.Screen name="index" options={{ tabBarLabel: 'Home' }} />
+      <Tabs.Protected guard={isLoggedIn}>
+        <Tabs.Screen name="private" options={{ tabBarLabel: 'Private' }} />
+        <Tabs.Screen name="profile" options={{ tabBarLabel: 'Profile' }} />
+      </Tabs.Protected>
+
+      <Tabs.Protected guard={!isLoggedIn}>
+        <Tabs.Screen name="login" options={{ tabBarLabel: 'Login' }} />
+      </Tabs.Protected>
+    </Tabs>
+  );
 }
 ```
 
