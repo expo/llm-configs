@@ -1,0 +1,13 @@
+{
+  "name": "@expo/llm-configs",
+  "version": "1.0.0",
+  "description": "LLM configuration files for Expo projects.",
+  "license": "MIT",
+  "files": [
+    "expo-app"
+  ],
+  "exports": {
+    "./expo-app/*": "./expo-app/*",
+    "./package.json": "./package.json"
+  }
+}
